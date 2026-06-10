@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL") // <--- Tambahin baris ini
+}
+enum Role {
+  OPERATOR
+  PIC_LOGISTIK
+}
+
+enum AssetCategory {
+  GENSET
+  AC
+  MESIN
+}
+
+enum AssetStatus {
+  BAIK
+  SERVIS
+  RUSAK
+}
+
+enum Quarter {
+  Q1
+  Q2
+  Q3
+  Q4
+}
+
+// 1. Model User (Data Karyawan/Admin Pusat dan PIC)
+model User {
+  id              String           @id @default(uuid())
+  initial         String           @unique
+  name            String
+  phone           String?
+  email           String?
+  role            Role             @default(PIC_LOGISTIK)
+  createdAt       DateTime         @default(now())
+  maintenanceLogs MaintenanceLog[]
+}
+
+// 2. Model Asset (Master Data)
+model Asset {
+  id              String                @id // assetId Unik, misal: GEN-DPK-001
+  category        AssetCategory
+  branchName      String
+  purchaseYear    Int
+  healthStatus    AssetStatus           @default(BAIK)
+  createdAt       DateTime              @default(now())
+  schedules       MaintenanceSchedule[]
+  logs            MaintenanceLog[]
+}
+
+// 3. Model MaintenanceSchedule (Target Kuartal & SLA)
+model MaintenanceSchedule {
+  id          String   @id @default(uuid())
+  assetId     String
+  asset       Asset    @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  quarter     Quarter
+  slaDeadline DateTime
+  createdAt   DateTime @default(now())
+}
+
+// 4. Model MaintenanceLog (History Riwayat Pengecekan)
+model MaintenanceLog {
+  id            String      @id @default(uuid())
+  assetId       String
+  asset         Asset       @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  userId        String
+  pic           User        @relation(fields: [userId], references: [id])
+  notes         String      // temuanCatatan
+  lastCondition AssetStatus // kondisiTerakhir
+  proofImgUrl   String?     // fotoBuktiUrl
+  createdAt     DateTime    @default(now())
+}
