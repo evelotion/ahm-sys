@@ -1,0 +1,11 @@
+{"timestamp":"00:00:06.540","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:06.540","source":"Server","level":"LOG","message":"  We detected TypeScript in your project and reconfigured your tsconfig.json file for you."}
+{"timestamp":"00:00:06.541","source":"Server","level":"LOG","message":"  The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:\n"}
+{"timestamp":"00:00:06.541","source":"Server","level":"LOG","message":"  \t- include was updated to add '.next/dev/types/**/*.ts'"}
+{"timestamp":"00:00:06.541","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:06.542","source":"Server","level":"LOG","message":"  The following mandatory changes were made to your tsconfig.json:\n"}
+{"timestamp":"00:00:06.544","source":"Server","level":"LOG","message":"  \t- jsx was set to react-jsx (next.js uses the React automatic runtime)"}
+{"timestamp":"00:00:06.544","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:07.128","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:10.257","source":"Server","level":"LOG","message":"○ Compiling /_not-found/page ..."}
+{"timestamp":"00:00:17.660","source":"Server","level":"WARN","message":"⚠ Blocked cross-origin request to Next.js dev resource /_next/webpack-hmr from \"3000-firebase-ahm-sys-1780908349063.cluster-w5vd22whf5gmav2vgkomwtc4go.cloudworkstations.dev\".\nCross-origin access to Next.js dev resources is blocked by default for safety.\n\nTo allow this host in development, add it to \"allowedDevOrigins\" in next.config.js and restart the dev server:\n\n// next.config.js\nmodule.exports = {\n  allowedDevOrigins: ['3000-firebase-ahm-sys-1780908349063.cluster-w5vd22whf5gmav2vgkomwtc4go.cloudworkstations.dev'],\n}\n\nRead more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins"}
